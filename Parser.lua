@@ -19,7 +19,7 @@ function Parser:New(strParam)
         return nil;
     end
     function IsCommand(cmd)
-        local comands = {"pop", "push", "add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not", "label", "if-goto"};
+        local comands = {"pop", "push", "add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not", "label", "if-goto", "function", "return", "call", "label", "goto"};
 
         for i, v in pairs(comands) do
             --print("comapar "..tostring(cmd).." "..i);
@@ -33,6 +33,13 @@ function Parser:New(strParam)
 
         while line  do
             PS.token.cmd, PS.token.segment, PS.token.index = line:match('^(.-)%s(.-)%s(%d+)');
+            if not PS.token.cmd and not line:match("^(//)")then
+                local s= {};
+                for str in line:gmatch("([^%s]+)") do
+                    table.insert(s, str);
+                end
+                PS.token.cmd, PS.token.segment = s[1], s[2];
+            end
             
             if IsCommand(PS.token.cmd) then
                 PS.line = PS.line + 1;
@@ -48,6 +55,6 @@ function Parser:New(strParam)
         end
         return nil;
     end
-    print("retornando")
+    --print("retornando")
     return PS;
 end
