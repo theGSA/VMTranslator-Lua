@@ -19,7 +19,7 @@ function Parser:New(strParam)
         return nil;
     end
     function IsCommand(cmd)
-        local comands = {"pop", "push", "add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not", "label", "if-goto", "function", "return", "call", "label", "goto"};
+        local comands = {"pop", "push", "add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not", "label", "if-goto", "function", "return", "call", "goto"};
 
         for i, v in pairs(comands) do
             --print("comapar "..tostring(cmd).." "..i);
